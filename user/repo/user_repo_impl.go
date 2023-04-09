@@ -36,6 +36,39 @@ func (r *UserRepoImpl) ReadAll() ([]*models.User, error) {
 	}
 
 	return user, nil
+}
 
 
+func (r *UserRepoImpl) GetId(id int64) (*models.User, error) {
+	var user *models.User
+
+	err := r.DB.Where("id = ?", id).First(&user).Error
+
+	if err != nil {
+		fmt.Printf("[UserRepoImpl.GetId] error execute query %v \n", err)
+		return nil, err
+	}
+
+	return user, nil
+}
+
+func (r *UserRepoImpl) Update(user *models.User) (*models.User, error) {
+	err := r.DB.Save(&user).Error
+	if err != nil {
+		fmt.Printf("[UserRepoImpl.Update] error execute query %v \n", err)
+		return nil, err
+	}
+
+	return user, nil
+}
+
+func (r *UserRepoImpl) Delete(id int64) (*models.User, error) {
+	var user = models.User{}
+
+	err := r.DB.Where("id = ?", id).Delete(&user).Error
+	if err != nil {
+		fmt.Printf("[UserRepoImpl.Delete] error execute query %v \n", err)
+		return nil, err
+	}
+	return &user, err
 }
