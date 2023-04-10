@@ -1,10 +1,4 @@
 <div>
-<style>
-    img{
-        width: 50%;
-        margin-left: 25%;
-    }
-</style>
 
 # Rest-api menggunakan gin-gonic dan database postgre
 
